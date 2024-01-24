@@ -1,7 +1,10 @@
 import './App.css';
+import { DeliveryFeeCalculator } from './components/deliveryFeeCalculator/DeliveryFeeCalculator';
 
 export const App = () => {
   return (
-    <h1>hello</h1>
-  )
-}
+    <>
+      <DeliveryFeeCalculator />
+    </>
+  );
+};
