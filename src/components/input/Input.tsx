@@ -1,8 +1,9 @@
+import { InputType } from '../../models';
 interface Props {
   label: string;
   htmlFor: string;
   dataTestId: string;
-  inputType: string;
+  inputType: InputType.NUMBER | InputType.DATE;
   id: string;
   labelDetail: string;
 }

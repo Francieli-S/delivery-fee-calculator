@@ -1,12 +1,10 @@
 import { Button } from '../button/Button';
 import { Input } from '../input/Input';
 import { Output } from '../output/Output';
+import { InputType } from '../../models';
+import { calculateDeliveryPrice } from '../../functions';
 
 export const DeliveryFeeCalculator = () => {
-
-  const calculateDeliveryPrice = () => {
-  }
-  
   return (
     <>
       <h1>Delivery Fee Calculator</h1>
@@ -15,7 +13,7 @@ export const DeliveryFeeCalculator = () => {
           label='Cart value'
           htmlFor='cart-value'
           dataTestId='cartValue'
-          inputType='number'
+          inputType={InputType.NUMBER}
           id='cart-value'
           labelDetail='$'
           // value='string'
@@ -25,7 +23,7 @@ export const DeliveryFeeCalculator = () => {
           label='Delivery distance'
           htmlFor='delivery-distance'
           dataTestId='deliveryDistance'
-          inputType='number'
+          inputType={InputType.NUMBER}
           id='delivery-distance'
           labelDetail='m'
           // value='string'
@@ -35,7 +33,7 @@ export const DeliveryFeeCalculator = () => {
           label='Number of items'
           htmlFor='number-of-items'
           dataTestId='numberOfItems'
-          inputType='number'
+          inputType={InputType.NUMBER}
           id='number-of-items'
           labelDetail=''
           // value='string'
@@ -45,7 +43,7 @@ export const DeliveryFeeCalculator = () => {
           label='Time'
           htmlFor='order-time'
           dataTestId='orderTime'
-          inputType='date'
+          inputType={InputType.DATE}
           id='order-time'
           labelDetail='calendar'
           // value='string'
@@ -55,7 +53,7 @@ export const DeliveryFeeCalculator = () => {
           text='Calculate delivery price'
           onClick={calculateDeliveryPrice}
         />
-        <Output 
+        <Output
           label='Delivery price:'
           output={0}
           htmlFor='delivery-price'

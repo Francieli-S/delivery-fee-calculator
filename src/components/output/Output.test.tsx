@@ -16,9 +16,9 @@ describe('Output', () => {
 
     const output = screen.getByLabelText('Output value');
     expect(output).toBeInTheDocument();
-    expect(output).toHaveAttribute('data-testid', 'outputValue')
-    expect(output.id).toEqual('output-value')    
-    expect(output.childNodes.length).toEqual(1)
+    expect(output).toHaveAttribute('data-testid', 'outputValue');
+    expect(output.id).toEqual('output-value');
+    expect(output.childNodes.length).toEqual(1);
     expect(within(output).getByText('123456')).toBeInTheDocument();
   });
 
@@ -34,8 +34,8 @@ describe('Output', () => {
 
     const output = screen.getByLabelText('Other output value');
     expect(output).toBeInTheDocument();
-    expect(output).toHaveAttribute('data-testid', 'otherOutputValue')
-    expect(output.id).toEqual('other-output-value')
-    expect(output.childNodes.length).toEqual(0)
+    expect(output).toHaveAttribute('data-testid', 'otherOutputValue');
+    expect(output.id).toEqual('other-output-value');
+    expect(output.childNodes.length).toEqual(0);
   });
 });
