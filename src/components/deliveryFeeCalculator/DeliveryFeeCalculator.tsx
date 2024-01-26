@@ -2,7 +2,7 @@ import { Button } from '../button/Button';
 import { Input } from '../input/Input';
 import { Output } from '../output/Output';
 import { InputType } from '../../models';
-import { calculateDeliveryPrice } from '../../functions';
+import { calculateDeliveryPrice } from '../../functions/functions';
 
 export const DeliveryFeeCalculator = () => {
   return (
@@ -15,7 +15,7 @@ export const DeliveryFeeCalculator = () => {
           dataTestId='cartValue'
           inputType={InputType.NUMBER}
           id='cart-value'
-          labelDetail='$'
+          labelDetail='€'
           // value='string'
           // onChange={() => {}}
         />

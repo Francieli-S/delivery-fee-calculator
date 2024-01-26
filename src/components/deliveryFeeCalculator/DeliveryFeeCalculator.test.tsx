@@ -5,6 +5,9 @@ describe('DeliveryFeeCalculator', () => {
   test('renders correctly', () => {
     render(<DeliveryFeeCalculator />);
 
+    // é melhor separar os testes? tipo render heading, render cart value field, render button...
+    // since I want to test the behaviour, add a test that when the button is clicked an output is displayed. Not only that .toHaveBeenCalled.
+
     const headingElement = screen.getByRole('heading', {name: 'Delivery Fee Calculator' });
     expect(headingElement).toBeInTheDocument();
 
@@ -14,7 +17,7 @@ describe('DeliveryFeeCalculator', () => {
     const cartValueId = screen.getByTestId('cartValue');
     expect(cartValueId).toBeInTheDocument();
     
-    const currencySignElement = screen.getByText('$')
+    const currencySignElement = screen.getByText('€')
     expect(currencySignElement).toBeInTheDocument()
 
     const deliveryDistanceElement = screen.getByLabelText('Delivery distance');
