@@ -1,10 +1,5 @@
 import { Cart, calculateDeliveryPrice } from "./functions";
 
-// test('calculateDeliveryPrice return price', () => {
-//     const result = calculateDeliveryPrice({})
-//     expect(result).toBe(11)
-// })
-
 const baseCart: Cart = {
     cartValue: 50,
     numberOfItems: 1,
@@ -28,8 +23,6 @@ describe('DeliveryFeeCalculator', () => {
         expect(result).toBe(0)
     })
 
-
-
     //if cart value = 0, there is probably no delivery. Value could be yero maybe
     test('when cart value is equal or more than 200, delivery fee is 0', () => {
         let result = calculateDeliveryPrice({...baseCart, cartValue: 200})
@@ -37,5 +30,16 @@ describe('DeliveryFeeCalculator', () => {
 
         result = calculateDeliveryPrice({...baseCart, cartValue: 201})
         expect(result).toBe(0)
+    })
+
+    test('when distance is more than 1000m, add 1€ per each next 500m', () => {
+        let result = calculateDeliveryPrice({...baseCart, deliveryDistance: 1499})
+        expect(result).toBe(3)
+
+        result = calculateDeliveryPrice({...baseCart, deliveryDistance: 1500})
+        expect(result).toBe(3)
+
+        result = calculateDeliveryPrice({...baseCart, deliveryDistance: 1501})
+        expect(result).toBe(4)
     })
 })
