@@ -3,7 +3,7 @@ interface Props {
   label: string;
   htmlFor: string;
   dataTestId: string;
-  inputType: InputType.NUMBER | InputType.DATE;
+  inputType: InputType.NUMBER | InputType.DATE_TIME;
   id: string;
   labelDetail: string;
 }

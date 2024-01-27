@@ -1,4 +1,4 @@
 export enum InputType {
     NUMBER = 'number',
-    DATE = 'date'
+    DATE_TIME = 'datetime-local'
   }

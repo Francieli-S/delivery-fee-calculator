@@ -43,7 +43,7 @@ export const DeliveryFeeCalculator = () => {
           label='Time'
           htmlFor='order-time'
           dataTestId='orderTime'
-          inputType={InputType.DATE}
+          inputType={InputType.DATE_TIME}
           id='order-time'
           labelDetail='calendar'
           // value='string'
