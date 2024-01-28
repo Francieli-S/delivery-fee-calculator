@@ -1,6 +1,6 @@
 interface Props {
   text: string;
-  onClick();
+  onClick: () => void;
 }
 
 export const Button = ({ text, onClick }: Props) => {

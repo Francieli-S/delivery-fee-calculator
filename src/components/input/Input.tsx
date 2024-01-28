@@ -5,7 +5,9 @@ interface Props {
   dataTestId: string;
   inputType: InputType.NUMBER | InputType.DATE_TIME;
   id: string;
-  labelDetail: string;
+  value: number | string 
+  onChange: (value: string | number) => void;
+  min?: string
 }
 
 export const Input = ({
@@ -14,13 +16,23 @@ export const Input = ({
   dataTestId,
   inputType,
   id,
-  labelDetail,
+  value,
+  onChange,
+  min
 }: Props) => {
   return (
     <div>
       <label htmlFor={htmlFor}>{label}</label>
-      <input data-testid={dataTestId} type={inputType} id={id} />
-      <span>{labelDetail}</span>
+      <input
+        data-testid={dataTestId}
+        type={inputType}
+        id={id}
+        onChange={(event) => {
+          onChange(event.target.value);
+        }}
+        value={value}
+        min={min}
+      />
     </div>
   );
 };

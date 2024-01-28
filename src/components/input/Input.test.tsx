@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Input } from './Input';
+import { InputType } from '../../models';
 
 describe('Input', () => {
   test('input renders correctly', () => {
@@ -8,19 +9,18 @@ describe('Input', () => {
           label='Input value'
           htmlFor='input-value'
           dataTestId='inputValue'
-          inputType='date'
+          inputType={InputType.DATE_TIME}
           id='input-value'
-          labelDetail='labelDetail'
+          onChange={jest.fn()}
+          value='initial-value'
         />
     );
 
     const input = screen.getByLabelText('Input value');
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('data-testid', 'inputValue')
-    expect(input).toHaveAttribute('type', 'date')
+    expect(input).toHaveAttribute('type', 'datetime-local')
     expect(input.id).toEqual('input-value')       
-    
-    const labelDetail = screen.getByText('labelDetail')
-    expect(labelDetail).toBeInTheDocument()
+    //expect(input.value).toEqual('initial-value') 
   });
 });

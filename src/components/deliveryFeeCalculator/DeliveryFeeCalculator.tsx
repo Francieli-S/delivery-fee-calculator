@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '../button/Button';
 import { Input } from '../input/Input';
 import { Output } from '../output/Output';
@@ -5,6 +6,13 @@ import { InputType } from '../../models';
 import { calculateDeliveryPrice } from '../../functions/functions';
 
 export const DeliveryFeeCalculator = () => {
+  const now = new Date().toISOString().slice(0, new Date().toISOString().lastIndexOf(":"))
+  const [cartValue, setCartValue] = useState<number>(0);
+  const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
+  const [numberOfItems, setNumberOfItems] = useState<number>(0);
+  const [orderDate, setOrderDate] = useState<string>(now);
+  const [deliveryFee, setDeliveryFee] = useState<number>(0);
+
   return (
     <>
       <h1>Delivery Fee Calculator</h1>
@@ -14,10 +22,9 @@ export const DeliveryFeeCalculator = () => {
           htmlFor='cart-value'
           dataTestId='cartValue'
           inputType={InputType.NUMBER}
-          id='cart-value'
-          labelDetail='€'
-          // value='string'
-          // onChange={() => {}}
+          id='cinputTart-value'
+          onChange={(value: number) => {setCartValue(value)}}
+          value={cartValue}
         />
         <Input
           label='Delivery distance'
@@ -25,9 +32,8 @@ export const DeliveryFeeCalculator = () => {
           dataTestId='deliveryDistance'
           inputType={InputType.NUMBER}
           id='delivery-distance'
-          labelDetail='m'
-          // value='string'
-          // onChange={() => {}}
+          onChange={(value: number) => {setDeliveryDistance(value)}}
+          value={deliveryDistance}
         />
         <Input
           label='Number of items'
@@ -35,9 +41,8 @@ export const DeliveryFeeCalculator = () => {
           dataTestId='numberOfItems'
           inputType={InputType.NUMBER}
           id='number-of-items'
-          labelDetail=''
-          // value='string'
-          // onChange={() => {}}
+          onChange={(value: number) => {setNumberOfItems(value)}}
+          value={numberOfItems}
         />
         <Input
           label='Time'
@@ -45,17 +50,26 @@ export const DeliveryFeeCalculator = () => {
           dataTestId='orderTime'
           inputType={InputType.DATE_TIME}
           id='order-time'
-          labelDetail='calendar'
-          // value='string'
-          // onChange={() => {}}
+          onChange={(value: string) => {setOrderDate(value)}}
+          min={now}
+          value={orderDate}
         />
         <Button
           text='Calculate delivery price'
-          onClick={calculateDeliveryPrice}
+          onClick={() => {
+            const newFee = calculateDeliveryPrice({
+              cartValue,
+              numberOfItems,
+              orderDate: new Date(orderDate),
+              deliveryDistance
+            })
+            setDeliveryFee(newFee)
+          }
+        }
         />
         <Output
           label='Delivery price:'
-          output={0}
+          output={deliveryFee}
           htmlFor='delivery-price'
           dataTestId='fee'
           id='delivery-price'
