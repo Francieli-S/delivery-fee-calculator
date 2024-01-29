@@ -21,6 +21,11 @@ describe('Input', () => {
     expect(input).toHaveAttribute('data-testid', 'inputValue')
     expect(input).toHaveAttribute('type', 'datetime-local')
     expect(input.id).toEqual('input-value')       
-    //expect(input.value).toEqual('initial-value') 
+    // expect(input.value).toEqual('initial-value') 
+    // see getByDusplayValue()
+    // expect(screen.getByRole('input', { name: 'the-inputs-id' })).toHaveValue('test');
+     // eu queria que fosse empty para os numericos
+     // escrever o test do onchange
+      
   });
 });

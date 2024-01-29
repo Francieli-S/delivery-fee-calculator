@@ -6,6 +6,9 @@ import { InputType } from '../../models';
 import { calculateDeliveryPrice } from '../../functions/functions';
 
 export const DeliveryFeeCalculator = () => {
+  // ta gerando uma hora a menos
+  // acho melhor iniciar empty os que sap zero
+  // date show dd/mm not mm/dd
   const now = new Date().toISOString().slice(0, new Date().toISOString().lastIndexOf(":"))
   const [cartValue, setCartValue] = useState<number>(0);
   const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
@@ -18,16 +21,18 @@ export const DeliveryFeeCalculator = () => {
       <h1>Delivery Fee Calculator</h1>
       <form>
         <Input
-          label='Cart value'
+          label='Cart value (€)'
           htmlFor='cart-value'
           dataTestId='cartValue'
           inputType={InputType.NUMBER}
-          id='cinputTart-value'
+          id='cart-value'
           onChange={(value: number) => {setCartValue(value)}}
           value={cartValue}
+          // add min to avoid -1
+          // required fields
         />
         <Input
-          label='Delivery distance'
+          label='Delivery distance (m)'
           htmlFor='delivery-distance'
           dataTestId='deliveryDistance'
           inputType={InputType.NUMBER}
@@ -45,7 +50,7 @@ export const DeliveryFeeCalculator = () => {
           value={numberOfItems}
         />
         <Input
-          label='Time'
+          label='Order time'
           htmlFor='order-time'
           dataTestId='orderTime'
           inputType={InputType.DATE_TIME}
@@ -59,9 +64,9 @@ export const DeliveryFeeCalculator = () => {
           onClick={() => {
             const newFee = calculateDeliveryPrice({
               cartValue,
-              numberOfItems,
-              orderDate: new Date(orderDate),
-              deliveryDistance
+              deliveryDistance,
+              numberOfItems,             
+              orderDate: new Date(orderDate),           
             })
             setDeliveryFee(newFee)
           }

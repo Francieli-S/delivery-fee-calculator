@@ -11,13 +11,13 @@ describe('DeliveryFeeCalculator', () => {
     const headingElement = screen.getByRole('heading', {name: 'Delivery Fee Calculator' });
     expect(headingElement).toBeInTheDocument();
 
-    // const cartValueElement = screen.getByLabelText('Cart value');
-    // expect(cartValueElement).toBeInTheDocument();
+    const cartValueElement = screen.getByLabelText('Cart value (€)');
+    expect(cartValueElement).toBeInTheDocument();
 
     const cartValueId = screen.getByTestId('cartValue');
     expect(cartValueId).toBeInTheDocument();
 
-    const deliveryDistanceElement = screen.getByLabelText('Delivery distance');
+    const deliveryDistanceElement = screen.getByLabelText('Delivery distance (m)');
     expect(deliveryDistanceElement).toBeInTheDocument();
 
     const deliveryDistanceId = screen.getByTestId('deliveryDistance');
@@ -29,7 +29,7 @@ describe('DeliveryFeeCalculator', () => {
     const numberOfItemsId = screen.getByTestId('numberOfItems');
     expect(numberOfItemsId).toBeInTheDocument();
 
-    const orderTimeElement = screen.getByLabelText('Time');
+    const orderTimeElement = screen.getByLabelText('Order time');
     expect(orderTimeElement).toBeInTheDocument();
 
     const orderTimeId = screen.getByTestId('orderTime');
