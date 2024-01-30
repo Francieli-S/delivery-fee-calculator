@@ -8,6 +8,8 @@ interface Props {
   value: number | string 
   onChange: (value: string | number) => void;
   min?: string
+  step?: string
+  required?: boolean
 }
 
 export const Input = ({
@@ -18,7 +20,9 @@ export const Input = ({
   id,
   value,
   onChange,
-  min
+  min,
+  step,
+  required = false
 }: Props) => {
   return (
     <div>
@@ -27,11 +31,13 @@ export const Input = ({
         data-testid={dataTestId}
         type={inputType}
         id={id}
+        value={value}
         onChange={(event) => {
           onChange(event.target.value);
-        }}
-        value={value}
+        }}        
         min={min}
+        step={step}
+        required={required}
       />
     </div>
   );

@@ -19,11 +19,7 @@ export const calculateDeliveryPrice = (cart: Cart): number => {
   }
 
   if (cart.numberOfItems >= 5) {
-    // deliveryFee += cart.numberOfItems * 0.5;
-    // it is not rigth
     deliveryFee += (cart.numberOfItems - 4) * 0.5;
-    // 'an additional 50 cent surcharge is added for each item above and including the fifth item..'
-    // maybe 0.5 is not applyed to item 1, 2, 3, and 4!
   }
 
   if (cart.numberOfItems > 12) {
@@ -38,7 +34,7 @@ export const calculateDeliveryPrice = (cart: Cart): number => {
     deliveryFee = 15
   }
 
-  return parseFloat(deliveryFee.toFixed(2));
+  return +deliveryFee.toFixed(2);
 };
 
 const isRushHour = (timestamp: Date): boolean => {

@@ -1,12 +1,16 @@
+import { ButtonType } from "../../models";
+
 interface Props {
   text: string;
-  onClick: () => void;
+  type: ButtonType
+  dataTestId: string
+  onClick?: () => void;
 }
 
-export const Button = ({ text, onClick }: Props) => {
+export const Button = ({ text, type, dataTestId, onClick }: Props) => {
   return (
     <div>
-      <button onClick={onClick}>{text}</button>
+      <button type={type} data-testid={dataTestId} onClick={onClick}>{text}</button>
     </div>
   );
 };
