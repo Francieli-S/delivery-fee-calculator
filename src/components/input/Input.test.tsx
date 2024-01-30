@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { Input } from './Input';
 import { InputType } from '../../models';
+import test from 'node:test';
 
 describe('Input', () => {
   test('input renders correctly', () => {
+    const onChangeMock = jest.fn()
     render(
         <Input
           label='Input value'
@@ -11,21 +13,18 @@ describe('Input', () => {
           dataTestId='inputValue'
           inputType={InputType.DATE_TIME}
           id='input-value'
-          onChange={jest.fn()}
+          onChange={onChangeMock}
           value='initial-value'
         />
     );
 
-    const input = screen.getByLabelText('Input value');
+    const input = screen.getByLabelText('Input value') as HTMLInputElement;
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('data-testid', 'inputValue')
-    expect(input).toHaveAttribute('type', 'datetime-local')
-    expect(input.id).toEqual('input-value')       
-    // expect(input.value).toEqual('initial-value') 
-    // see getByDusplayValue()
-    // expect(screen.getByRole('input', { name: 'the-inputs-id' })).toHaveValue('test');
-     // eu queria que fosse empty para os numericos
-     // escrever o test do onchange
-      
+    expect(input.type).toEqual('datetime-local')
+    expect(input.id).toEqual('input-value')  
+    expect(input).toHaveAttribute('value', 'initial-value')     
+    // expect(input.value).toBe('initial-value')
+    // expect(input.onchange).toBe(onChangeMock)      
   });
 });

@@ -9,15 +9,18 @@ export const DeliveryFeeCalculator = () => {
   // ta gerando uma hora a menos
   // reset button, para initial value to empty, number X string
   // output 2.5 nao 2.50
-  const now = new Date()
+
+  const getDateNow = () => {
+    return new Date()
     .toISOString()
     .slice(0, new Date().toISOString().lastIndexOf(':'));
-  const [cartValue, setCartValue] = useState<number>();
-  const [deliveryDistance, setDeliveryDistance] = useState<number>();
-  const [numberOfItems, setNumberOfItems] = useState<number>();
-  const [orderDate, setOrderDate] = useState<string>(now);
-  const [deliveryFee, setDeliveryFee] = useState<number>();
-  const [isCalculating, setIsCalculating] = useState<boolean>(true);
+  }
+
+  const [cartValue, setCartValue] = useState<number>(0);
+  const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
+  const [numberOfItems, setNumberOfItems] = useState<number>(0);
+  const [orderDate, setOrderDate] = useState<string>(getDateNow());
+  const [deliveryFee, setDeliveryFee] = useState<number>(0);
 
   const calculateFee = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,6 @@ export const DeliveryFeeCalculator = () => {
       orderDate: new Date(orderDate),
     });
     setDeliveryFee(newFee);
-    setIsCalculating(false);
   };
 
   return (
@@ -85,11 +87,10 @@ export const DeliveryFeeCalculator = () => {
             setOrderDate(value);
           }}
           value={orderDate}
-          min={now}
+          min={getDateNow()}
           required={true}
         />
         <Button
-          // disabled={isCalculating}
           text='Calculate delivery price'
           type={ButtonType.SUBMIT}
           dataTestId='calculateDeliveryPrice'
@@ -101,21 +102,18 @@ export const DeliveryFeeCalculator = () => {
           dataTestId='fee'
           id='delivery-price'
         />
-        {!isCalculating && (
           <Button
-            text='New calculation'
+            text='Clean'
             type={ButtonType.BUTTON}
-            dataTestId='newCalculation'
+            dataTestId='clean'
             onClick={() => {
               setCartValue(0),
                 setDeliveryDistance(0),
                 setNumberOfItems(0),
-                setOrderDate(now),
-                setDeliveryFee(0),
-                setIsCalculating(true);
+                setOrderDate(getDateNow()),
+                setDeliveryFee(0)
             }}
-          />
-        )}
+          />        
       </form>
     </>
   );

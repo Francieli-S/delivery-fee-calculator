@@ -1,14 +1,12 @@
 import { render, screen } from '@testing-library/react';
+import user from '@testing-library/user-event'
 import { DeliveryFeeCalculator } from './DeliveryFeeCalculator';
 
-let mockDate: Date;
-
+const mockDate: string = '2023-01-01T01:01';
 describe('DeliveryFeeCalculator', () => {
   beforeEach(() => {
-    mockDate = new Date('2023-01-01T01:01:01.001Z');
-
     jest.useFakeTimers();
-    jest.setSystemTime(mockDate);
+    jest.setSystemTime(new Date(mockDate + ':01.001Z'));
   });
 
   afterEach(() => {
@@ -24,54 +22,88 @@ describe('DeliveryFeeCalculator', () => {
     const headingElement = screen.getByRole('heading', {name: 'Delivery Fee Calculator' });
     expect(headingElement).toBeInTheDocument();
 
-    const cartValueElement = screen.getByLabelText('Cart value (€)');
-    expect(cartValueElement).toBeInTheDocument();
-    expect(cartValueElement).toHaveDisplayValue('')
+    const cartValue = getByTestId('cartValue');
+    expect(cartValue).toBeInTheDocument();
+    expect(cartValue.value).toBe('0')
 
-    const cartValueId = screen.getByTestId('cartValue');
-    expect(cartValueId).toBeInTheDocument();
+    const deliveryDistance = getByTestId('deliveryDistance');
+    expect(deliveryDistance).toBeInTheDocument();
+    expect(deliveryDistance.value).toBe('0')
 
-    const deliveryDistanceElement = screen.getByLabelText('Delivery distance (m)');
-    expect(deliveryDistanceElement).toBeInTheDocument();
-    expect(deliveryDistanceElement).toHaveDisplayValue('')
+    const numberOfItems = getByTestId('numberOfItems');
+    expect(numberOfItems).toBeInTheDocument();
+    expect(numberOfItems.value).toBe('0')
 
-    const deliveryDistanceId = screen.getByTestId('deliveryDistance');
-    expect(deliveryDistanceId).toBeInTheDocument();
-
-    const numberOfItemsElement = screen.getByLabelText('Number of items');
-    expect(numberOfItemsElement).toBeInTheDocument();
-    expect(numberOfItemsElement).toHaveDisplayValue('')
-
-    const numberOfItemsId = screen.getByTestId('numberOfItems');
-    expect(numberOfItemsId).toBeInTheDocument();
-
-    const orderTimeElement = screen.getByLabelText('Order time (UTC)');
-    expect(orderTimeElement).toBeInTheDocument();
-    expect(orderTimeElement).toHaveDisplayValue(mockDate.toISOString().slice(0, new Date().toISOString().lastIndexOf(':')))
+    const orderTime = getByTestId('orderTime');
+    expect(orderTime).toBeInTheDocument();
+    expect(orderTime.value).toBe(mockDate)
     
-    const orderTimeId = screen.getByTestId('orderTime');
-    expect(orderTimeId).toBeInTheDocument();
+    const submitButton = getByTestId('calculateDeliveryPrice');
+    expect(submitButton).toBeInTheDocument();
 
-    const submitButtonElement = screen.getByRole('button', {name: 'Calculate delivery price'});
-    expect(submitButtonElement).toBeInTheDocument();
-    // expect(submitButtonElement).toBeDisabled() ver se precisa
+    const deliveryPrice = getByTestId('fee');
+    expect(deliveryPrice).toBeInTheDocument();
+    expect(deliveryPrice.value).toBe('0')
 
-    const submitButtonId = screen.getByTestId('calculateDeliveryPrice');
-    expect(submitButtonId).toBeInTheDocument();
+    const cleanButton = getByTestId('clean');
+    expect(cleanButton).toBeInTheDocument();
+  });
 
-    const deliveryPriceElement = screen.getByLabelText('Delivery price:');
-    expect(deliveryPriceElement).toBeInTheDocument();
-    // expect(deliveryPriceElement.).toHaveDisplayValue('')
+  test('clean button cleans input fields', async () => {
+    const userEvent = user.setup({ delay: null })
+    render(<DeliveryFeeCalculator />);
 
-    const deliveryPriceId = screen.getByTestId('fee');
-    expect(deliveryPriceId).toBeInTheDocument();
+    const cartValue = getByTestId('cartValue');
+    await userEvent.type(cartValue, '10')
+    expect(cartValue.value).toBe('10')
 
-    // test the output
+    const deliveryDistance = getByTestId('deliveryDistance');
+    await userEvent.type(deliveryDistance, '1000')
+    expect(deliveryDistance.value).toBe('1000')
 
-    const newCalculationButtonElement = screen.queryByRole('button', {name: 'New Calculation'})
-    expect(newCalculationButtonElement).not.toBeInTheDocument()
+    const numberOfItems = getByTestId('numberOfItems');
+    await userEvent.type(numberOfItems, '5')
+    expect(numberOfItems.value).toBe('5')
 
-    const newCalculationButtonId = screen.queryByTestId('newCalculation');
-    expect(newCalculationButtonId).not.toBeInTheDocument();
+    const orderTime = getByTestId('orderTime');
+    userEvent.clear(orderTime)
+    await userEvent.type(orderTime, '2024-01-02T02:02')
+    expect(orderTime.value).toBe('2024-01-02T02:02')
+
+    await userEvent.click(getByTestId('clean'))
+
+    expect(cartValue.value).toBe('0')
+    expect(deliveryDistance.value).toBe('0')
+    expect(numberOfItems.value).toBe('0')
+    expect(orderTime.value).toBe(mockDate)
+    expect(getByTestId('fee').value).toBe('0')
+  });
+
+  test('submit button calculates delivery fee', async () => {
+    const userEvent = user.setup({ delay: null })
+    render(<DeliveryFeeCalculator />);
+
+    const cartValue = getByTestId('cartValue');
+    await userEvent.type(cartValue, '10')
+
+    const deliveryDistance = getByTestId('deliveryDistance');
+    await userEvent.type(deliveryDistance, '1000')
+
+    const numberOfItems = getByTestId('numberOfItems');
+    await userEvent.type(numberOfItems, '5')
+
+    const orderTime = getByTestId('orderTime');
+    userEvent.clear(orderTime)
+    await userEvent.type(orderTime, '2024-01-02T02:02')
+
+    await userEvent.click(getByTestId('calculateDeliveryPrice'))
+
+    const output = getByTestId('fee');
+    expect(output).toBeInTheDocument();
+    expect(output.value).toBe('2.5')
   });
 });
+
+const getByTestId = (testId: string): HTMLInputElement => {
+  return screen.getByTestId(testId) as HTMLInputElement;
+}
