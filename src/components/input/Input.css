@@ -22,6 +22,5 @@
 }
 
 .input-container > :focus {
-    outline: none;
-  }
-
+  outline: none;
+}

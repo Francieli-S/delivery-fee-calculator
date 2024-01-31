@@ -1,15 +1,14 @@
 .output-container {
-    width: 100%;
-    font-size: 1.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-   gap: 20px
-  }
+  width: 100%;
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
-  .fee {
-    font-size: 2em;
-    font-weight: 400;
-  }
-
+.fee {
+  font-size: 2em;
+  font-weight: 400;
+}

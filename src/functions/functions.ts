@@ -2,7 +2,7 @@ export interface Cart {
   cartValue: number;
   deliveryDistance: number;
   numberOfItems: number;
-  orderDate: Date;  
+  orderDate: Date;
 }
 
 export const calculateDeliveryPrice = (cart: Cart): number => {
@@ -10,8 +10,8 @@ export const calculateDeliveryPrice = (cart: Cart): number => {
 
   let deliveryFee: number = 2;
 
-  if(cart.cartValue < 10) {
-    deliveryFee += (10 - cart.cartValue)
+  if (cart.cartValue < 10) {
+    deliveryFee += 10 - cart.cartValue;
   }
 
   if (cart.deliveryDistance > 1000) {
@@ -26,21 +26,29 @@ export const calculateDeliveryPrice = (cart: Cart): number => {
     deliveryFee += 1.2;
   }
 
-  if(isRushHour(cart.orderDate)) {
-    deliveryFee *= 1.2
+  if (isRushHour(cart.orderDate)) {
+    deliveryFee *= 1.2;
   }
 
-  if(deliveryFee > 15) {
-    deliveryFee = 15
+  if (deliveryFee > 15) {
+    deliveryFee = 15;
   }
 
   return +deliveryFee.toFixed(2);
 };
 
 const isRushHour = (timestamp: Date): boolean => {
-  const daysOfWeek = ['Sunday', 'Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const weekDay = daysOfWeek[timestamp.getDay()]
-  const hour = timestamp.getHours()
-  
-  return weekDay === 'Friday' && hour >= 15 && hour < 19
-}
+  const daysOfWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const weekDay = daysOfWeek[timestamp.getDay()];
+  const hour = timestamp.getHours();
+
+  return weekDay === 'Friday' && hour >= 15 && hour < 19;
+};

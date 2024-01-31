@@ -6,11 +6,11 @@ interface Props {
   dataTestId: string;
   inputType: InputType.NUMBER | InputType.DATE_TIME;
   id: string;
-  value: number | string 
+  value: number | string;
   onChange: (value: string | number) => void;
-  min?: string
-  step?: string
-  required?: boolean
+  min?: string;
+  step?: string;
+  required?: boolean;
 }
 
 export const Input = ({
@@ -23,7 +23,7 @@ export const Input = ({
   onChange,
   min,
   step,
-  required = false
+  required = false,
 }: Props) => {
   return (
     <div className='input-container'>
@@ -35,7 +35,7 @@ export const Input = ({
         value={value}
         onChange={(event) => {
           onChange(event.target.value);
-        }}        
+        }}
         min={min}
         step={step}
         required={required}

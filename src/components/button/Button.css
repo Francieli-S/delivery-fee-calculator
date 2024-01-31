@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .button-container > button {
-        width: 150px;
-    }
+  .button-container > button {
+    width: 150px;
   }
+}

@@ -8,11 +8,11 @@ import './DeliveryFeeCalculator.css';
 
 export const DeliveryFeeCalculator = () => {
   const getDateNow = () => {
-    const timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
-    return (new Date(Date.now() - timeZoneOffset))
-    .toISOString()
-    .slice(0, new Date().toISOString().lastIndexOf(':'));
-  }
+    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+    return new Date(Date.now() - timeZoneOffset)
+      .toISOString()
+      .slice(0, new Date().toISOString().lastIndexOf(':'));
+  };
 
   const [cartValue, setCartValue] = useState<number>(0);
   const [deliveryDistance, setDeliveryDistance] = useState<number>(0);
@@ -30,10 +30,10 @@ export const DeliveryFeeCalculator = () => {
     });
     setDeliveryFee(newFee);
   };
-  
-  const outPutFormat = Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "EUR",
+
+  const outPutFormat = Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'EUR',
     minimumFractionDigits: 2,
   });
 
@@ -95,12 +95,12 @@ export const DeliveryFeeCalculator = () => {
           required={true}
         />
         <div className='container-buttons'>
-        <Button
-          text='Calculate'
-          type={ButtonType.SUBMIT}
-          dataTestId='calculateDeliveryPrice'
-        />
-        <Button
+          <Button
+            text='Calculate'
+            type={ButtonType.SUBMIT}
+            dataTestId='calculateDeliveryPrice'
+          />
+          <Button
             text='Clean'
             type={ButtonType.BUTTON}
             dataTestId='clean'
@@ -109,17 +109,17 @@ export const DeliveryFeeCalculator = () => {
                 setDeliveryDistance(0),
                 setNumberOfItems(0),
                 setOrderDate(getDateNow()),
-                setDeliveryFee(0)
+                setDeliveryFee(0);
             }}
-          />  
-          </div>
+          />
+        </div>
         <Output
           label='Delivery price:'
           output={outPutFormat.format(deliveryFee)}
           htmlFor='delivery-price'
           dataTestId='fee'
           id='delivery-price'
-        />      
+        />
       </form>
     </div>
   );

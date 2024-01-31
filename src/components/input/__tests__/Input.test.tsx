@@ -28,7 +28,7 @@ describe('Input', () => {
     expect(input).toHaveAttribute('value', '');
     expect(input).toHaveAttribute('min', '1');
     expect(input).toHaveAttribute('step', '1');
-    expect(onChangeMock).not.toHaveBeenCalled()
+    expect(onChangeMock).not.toHaveBeenCalled();
   });
 
   test('input field receives a value and call onChange', async () => {
@@ -46,7 +46,7 @@ describe('Input', () => {
     );
 
     const input = screen.getByTestId('inputValue');
-    
+
     await user.setup().type(input, '9');
 
     expect(onChangeMock).toHaveBeenCalledTimes(1);
