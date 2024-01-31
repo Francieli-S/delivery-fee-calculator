@@ -1,17 +1,17 @@
 import './Output.css'
 interface Props {
   label: string;
-  output?: number;
   htmlFor: string;
   dataTestId: string;
   id: string;
+  output?: string;
 }
 
-export const Output = ({ label, output, htmlFor, dataTestId, id }: Props) => {
+export const Output = ({ label, htmlFor, dataTestId, id, output }: Props) => {
   return (
-    <div className="output">
+    <div className="output-container">
       <label htmlFor={htmlFor}>{label} </label>
-      <output data-testid={dataTestId} id={id}>
+      <output className='fee' data-testid={dataTestId} id={id}>
         {output}
       </output>
     </div>

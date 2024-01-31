@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event'
-import { DeliveryFeeCalculator } from './DeliveryFeeCalculator';
+import { DeliveryFeeCalculator } from '../DeliveryFeeCalculator';
 
 const mockDate: string = '2023-01-01T01:01';
 describe('DeliveryFeeCalculator', () => {
@@ -15,9 +15,6 @@ describe('DeliveryFeeCalculator', () => {
 
   test('renders correctly', () => {
     render(<DeliveryFeeCalculator />);
-
-    // é melhor separar os testes? tipo render heading, render cart value field, render button...
-    // since I want to test the behaviour, add a test that when the button is clicked an output is displayed. Not only that .toHaveBeenCalled.
 
     const headingElement = screen.getByRole('heading', {name: 'Delivery Fee Calculator' });
     expect(headingElement).toBeInTheDocument();
@@ -43,7 +40,7 @@ describe('DeliveryFeeCalculator', () => {
 
     const deliveryPrice = getByTestId('fee');
     expect(deliveryPrice).toBeInTheDocument();
-    expect(deliveryPrice.value).toBe('0')
+    expect(deliveryPrice.value).toBe('€0.00')
 
     const cleanButton = getByTestId('clean');
     expect(cleanButton).toBeInTheDocument();
@@ -76,7 +73,7 @@ describe('DeliveryFeeCalculator', () => {
     expect(deliveryDistance.value).toBe('0')
     expect(numberOfItems.value).toBe('0')
     expect(orderTime.value).toBe(mockDate)
-    expect(getByTestId('fee').value).toBe('0')
+    expect(getByTestId('fee').value).toBe('€0.00')
   });
 
   test('submit button calculates delivery fee', async () => {
@@ -100,7 +97,7 @@ describe('DeliveryFeeCalculator', () => {
 
     const output = getByTestId('fee');
     expect(output).toBeInTheDocument();
-    expect(output.value).toBe('2.5')
+    expect(output.value).toBe('€2.50')
   });
 });
 

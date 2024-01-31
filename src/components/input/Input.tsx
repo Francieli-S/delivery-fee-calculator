@@ -1,4 +1,4 @@
-import { InputType } from '../../models';
+import { InputType } from '../models';
 import './Input.css';
 interface Props {
   label: string;

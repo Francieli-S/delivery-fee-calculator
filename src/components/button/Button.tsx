@@ -1,4 +1,4 @@
-import { ButtonType } from "../../models";
+import { ButtonType } from "../models";
 import './Button.css'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export const Button = ({ text, type, dataTestId, onClick }: Props) => {
   return (
-    <div className="button">
+    <div className="button-container">
       <button type={type} data-testid={dataTestId} onClick={onClick}>{text}</button>
     </div>
   );

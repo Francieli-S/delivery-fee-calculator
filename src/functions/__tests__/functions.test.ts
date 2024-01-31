@@ -1,4 +1,4 @@
-import { Cart, calculateDeliveryPrice } from "./functions";
+import { Cart, calculateDeliveryPrice } from "../functions";
 
 const baseCart: Cart = {
     cartValue: 50,
@@ -84,7 +84,6 @@ describe('DeliveryFeeCalculator', () => {
         expect(result).toBe(15)
     })
 
-     //if cart value = 0, there is probably no delivery. Value could be yero maybe
      test('when cart value is equal or more than 200, delivery fee is 0', () => {
         let result = calculateDeliveryPrice({...baseCart, cartValue: 200})
         expect(result).toBe(0)

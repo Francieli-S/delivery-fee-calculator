@@ -1,7 +1,7 @@
 {
   "name": "deliveryfeecalculator",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.23.3",
-    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -30,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "jest-environment-jsdom": "^29.7.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

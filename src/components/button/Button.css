@@ -1,9 +1,21 @@
-.button {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 1.5em;
-    margin-bottom: 20px;
+.button-container > button {
+  border: none;
+  border-radius: 50px;
+  width: 200px;
+  height: 65px;
+  font-size: 1em;
+  background-color: rgb(53, 178, 240);
+  color: white;
+  cursor: pointer;
+}
+
+.button-container > button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 5px black;
+}
+
+@media screen and (max-width: 768px) {
+    .button-container > button {
+        width: 150px;
+    }
   }

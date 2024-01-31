@@ -2,17 +2,14 @@ import { useState } from 'react';
 import { Button } from '../button/Button';
 import { Input } from '../input/Input';
 import { Output } from '../output/Output';
-import { ButtonType, InputType } from '../../models';
+import { ButtonType, InputType } from '../models';
 import { calculateDeliveryPrice } from '../../functions/functions';
 import './DeliveryFeeCalculator.css';
 
 export const DeliveryFeeCalculator = () => {
-  // ta gerando uma hora a menos
-  // reset button, para initial value to empty, number X string
-  // output 2.5 nao 2.50
-
   const getDateNow = () => {
-    return new Date()
+    const timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
+    return (new Date(Date.now() - timeZoneOffset))
     .toISOString()
     .slice(0, new Date().toISOString().lastIndexOf(':'));
   }
@@ -33,11 +30,17 @@ export const DeliveryFeeCalculator = () => {
     });
     setDeliveryFee(newFee);
   };
+  
+  const outPutFormat = Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 2,
+  });
 
   return (
-    <div className='deliveryFeeCalculator-container'>
+    <div className='container'>
       <h1>Delivery Fee Calculator</h1>
-      <form onSubmit={calculateFee} className='deliveryFeeCalculator-form'>
+      <form onSubmit={calculateFee}>
         <Input
           label='Cart value (€)'
           htmlFor='cart-value'
@@ -91,19 +94,13 @@ export const DeliveryFeeCalculator = () => {
           min={getDateNow()}
           required={true}
         />
+        <div className='container-buttons'>
         <Button
-          text='Calculate delivery price'
+          text='Calculate'
           type={ButtonType.SUBMIT}
           dataTestId='calculateDeliveryPrice'
         />
-        <Output
-          label='Delivery price:'
-          output={deliveryFee}
-          htmlFor='delivery-price'
-          dataTestId='fee'
-          id='delivery-price'
-        />
-          <Button
+        <Button
             text='Clean'
             type={ButtonType.BUTTON}
             dataTestId='clean'
@@ -114,7 +111,15 @@ export const DeliveryFeeCalculator = () => {
                 setOrderDate(getDateNow()),
                 setDeliveryFee(0)
             }}
-          />        
+          />  
+          </div>
+        <Output
+          label='Delivery price:'
+          output={outPutFormat.format(deliveryFee)}
+          htmlFor='delivery-price'
+          dataTestId='fee'
+          id='delivery-price'
+        />      
       </form>
     </div>
   );

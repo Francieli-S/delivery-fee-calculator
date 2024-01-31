@@ -1,4 +1,4 @@
-.deliveryFeeCalculator-container {
+.container {
   width: 700px;
   background-color: white;
   border-radius: 5px;
@@ -9,10 +9,30 @@
   align-items: center;
 }
 
-.deliveryFeeCalculator-form {
-  width: 70%;
+.container > form {
+  width: 80%;
+  margin: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+}
+
+.container > h1 {
+  color: rgb(53, 178, 240);
+  font-size: 2.5em;
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 30rem;
+  }
 }
