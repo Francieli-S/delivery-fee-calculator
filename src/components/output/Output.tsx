@@ -1,3 +1,4 @@
+import './Output.css'
 interface Props {
   label: string;
   output?: number;
@@ -8,7 +9,7 @@ interface Props {
 
 export const Output = ({ label, output, htmlFor, dataTestId, id }: Props) => {
   return (
-    <div>
+    <div className="output">
       <label htmlFor={htmlFor}>{label} </label>
       <output data-testid={dataTestId} id={id}>
         {output}

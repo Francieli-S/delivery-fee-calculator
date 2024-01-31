@@ -3,8 +3,8 @@ import { DeliveryFeeCalculator } from './components/deliveryFeeCalculator/Delive
 
 export const App = () => {
   return (
-    <>
+    <div className='app'>
       <DeliveryFeeCalculator />
-    </>
+    </div>
   );
 };

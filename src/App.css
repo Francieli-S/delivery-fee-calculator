@@ -1,6 +1,16 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.app {
   text-align: center;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1130px) and (min-width: 320px) {
 }

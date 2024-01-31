@@ -4,6 +4,7 @@ import { Input } from '../input/Input';
 import { Output } from '../output/Output';
 import { ButtonType, InputType } from '../../models';
 import { calculateDeliveryPrice } from '../../functions/functions';
+import './DeliveryFeeCalculator.css';
 
 export const DeliveryFeeCalculator = () => {
   // ta gerando uma hora a menos
@@ -34,9 +35,9 @@ export const DeliveryFeeCalculator = () => {
   };
 
   return (
-    <>
+    <div className='deliveryFeeCalculator-container'>
       <h1>Delivery Fee Calculator</h1>
-      <form onSubmit={calculateFee}>
+      <form onSubmit={calculateFee} className='deliveryFeeCalculator-form'>
         <Input
           label='Cart value (€)'
           htmlFor='cart-value'
@@ -115,6 +116,6 @@ export const DeliveryFeeCalculator = () => {
             }}
           />        
       </form>
-    </>
+    </div>
   );
 };

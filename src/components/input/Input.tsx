@@ -1,4 +1,5 @@
 import { InputType } from '../../models';
+import './Input.css';
 interface Props {
   label: string;
   htmlFor: string;
@@ -25,7 +26,7 @@ export const Input = ({
   required = false
 }: Props) => {
   return (
-    <div>
+    <div className='input-container'>
       <label htmlFor={htmlFor}>{label}</label>
       <input
         data-testid={dataTestId}

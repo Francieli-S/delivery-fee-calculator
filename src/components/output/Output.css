@@ -1,0 +1,9 @@
+.output {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
