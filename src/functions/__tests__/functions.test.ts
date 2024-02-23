@@ -103,7 +103,7 @@ describe('DeliveryFeeCalculator', () => {
     expect(result).toBe(minimalDeliveyFee * 1.2);
   });
 
-  test('when delivery fee is more than 15€, the delivery fee is free (0€)', () => {
+  test('when delivery fee is more than 15€, the delivery fee is 15€', () => {
     const result = calculateDeliveryPrice({
       ...baseCart,
       cartValue: 1,

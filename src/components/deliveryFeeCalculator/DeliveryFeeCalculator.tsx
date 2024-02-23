@@ -9,9 +9,9 @@ import './DeliveryFeeCalculator.css';
 export const DeliveryFeeCalculator = () => {
   const getDateNow = () => {
     const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-    return new Date(Date.now() - timeZoneOffset)
-      .toISOString()
-      .slice(0, new Date().toISOString().lastIndexOf(':'));
+    const dateNow = new Date(Date.now() - timeZoneOffset)
+    .toISOString()
+    return dateNow.slice(0, dateNow.lastIndexOf(':'));
   };
 
   const [cartValue, setCartValue] = useState<number>(0);
